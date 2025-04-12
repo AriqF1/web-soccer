@@ -1,9 +1,9 @@
-const StandingTables = () => {
+const StandingTables = ({league,standings}) => {
   return (
     <>
       <div className="flex flex-col items-center justify-center w-screen bg-white dark:bg-gray-900 pt-3 pb-10">
         <h1 className="text-lg text-gray-900 dark:text-white font-medium">
-          2024-25 Season
+            {league ? `${league.name} - ${league.season}` : ""}
         </h1>
         <div className="flex flex-col mt-6">
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -67,46 +67,53 @@ const StandingTables = () => {
                       >
                         Pts
                       </th>
-                      <th
-                        scope="col"
-                        className="px-3 md:px-6 py-3 text-left tracking-wider hidden md:table-cell"
-                      >
-                        Last 5
-                      </th>
                     </tr>
                   </thead>
                   <tbody className="bg-white dark:bg-gray-700">
-                    <tr className="bg-gray-200 dark:bg-black bg-opacity-20">
-                      <td className="pl-4">1</td>
+                   {standings &&
+                     standings.map((item, index) => (
+                       <tr
+                         key={index}
+                         className={
+                           item.position % 2 === 1
+                             ? "bg-gray-200 dark:bg-black bg-opacity-20"
+                             : ""
+                         }
+                       >
+                      <td className="pl-4"> {item.position} </td>
                       <td className="flex px-3 md:px-6 py-4 whitespace-nowrap">
                         <img
                           className="w-5"
-                          src="https://ssl.gstatic.com/onebox/media/sports/logos/udQ6ns69PctCv143h-GeYw_48x48.png"
+                          src="{item.team.logo}"
                           alt=""
                         />
                         <span className="ml-2 font-medium hidden md:block">
-                          Man United
+                          {item.team.name}
                         </span>
                       </td>
                       <td className="px-3 md:px-6 py-4 whitespace-nowrap">
-                        17
+                        {item.total.games}
                       </td>
                       <td className="px-3 md:px-6 py-4 whitespace-nowrap">
-                        11
+                        {item.total.wins} 
                       </td>
-                      <td className="px-3 md:px-6 py-4 whitespace-nowrap">3</td>
-                      <td className="px-3 md:px-6 py-4 whitespace-nowrap">3</td>
+                      <td className="px-3 md:px-6 py-4 whitespace-nowrap">
+                        {item.total.draws}
+                      </td>
+                      <td className="px-3 md:px-6 py-4 whitespace-nowrap">
+                        {item.total.loses}
+                      </td>
                       <td className="px-3 md:px-6 py-4 whitespace-nowrap hidden md:table-cell">
-                        34
+                        {item.total.scoredGoals}
                       </td>
                       <td className="px-3 md:px-6 py-4 whitespace-nowrap hidden md:table-cell">
-                        24
+                        {item.total.receivedGoals}
                       </td>
                       <td className="px-3 md:px-6 py-4 whitespace-nowrap">
-                        10
+                        {item.total.scoredGoals - item.total.reciviedGoals}
                       </td>
                       <td className="px-3 md:px-6 py-4 whitespace-nowrap">
-                        34
+                        {item.points}
                       </td>
                       <td className="px-3 md:px-6 py-4 whitespace-nowrap hidden md:flex">
                         <svg
@@ -171,99 +178,7 @@ const StandingTables = () => {
                         </svg>
                       </td>
                     </tr>
-                    <tr>
-                      <td className="pl-4">2</td>
-                      <td className="flex px-3 md:px-6 py-4 whitespace-nowrap">
-                        <img
-                          className="w-5"
-                          src="https://ssl.gstatic.com/onebox/media/sports/logos/0iShHhASp5q1SL4JhtwJiw_48x48.png"
-                          alt=""
-                        />
-                        <span className="ml-2 font-medium hidden md:block">
-                          Liverpool
-                        </span>
-                      </td>
-                      <td className="px-3 md:px-6 py-4 whitespace-nowrap">
-                        17
-                      </td>
-                      <td className="px-3 md:px-6 py-4 whitespace-nowrap">9</td>
-                      <td className="px-3 md:px-6 py-4 whitespace-nowrap">6</td>
-                      <td className="px-3 md:px-6 py-4 whitespace-nowrap">2</td>
-                      <td className="px-3 md:px-6 py-4 whitespace-nowrap hidden md:table-cell">
-                        37
-                      </td>
-                      <td className="px-3 md:px-6 py-4 whitespace-nowrap hidden md:table-cell">
-                        21
-                      </td>
-                      <td className="px-3 md:px-6 py-4 whitespace-nowrap">
-                        16
-                      </td>
-                      <td className="px-3 md:px-6 py-4 whitespace-nowrap">
-                        33
-                      </td>
-                      <td className="px-3 md:px-6 py-4 whitespace-nowrap hidden md:flex">
-                        <svg
-                          className="w-4 fill-current text-red-500"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                            clip-rule="evenodd"
-                          />
-                        </svg>
-                        <svg
-                          className="w-4 fill-current text-gray-400"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z"
-                            clip-rule="evenodd"
-                          />
-                        </svg>
-                        <svg
-                          className="w-4 fill-current text-gray-400"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z"
-                            clip-rule="evenodd"
-                          />
-                        </svg>
-                        <svg
-                          className="w-4 fill-current text-green-600"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                            clip-rule="evenodd"
-                          />
-                        </svg>
-                        <svg
-                          className="w-4 fill-current text-green-600"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                            clip-rule="evenodd"
-                          />
-                        </svg>
-                      </td>
-                    </tr>
+                     ))}
                   </tbody>
                 </table>
               </div>
