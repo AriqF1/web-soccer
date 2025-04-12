@@ -14,7 +14,7 @@ const Navbar = () => {
                 alt="Flowbite Logo"
               />
               <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-                PL Hub
+                Premier HUB
               </span>
             </a>
             <div className="flex items-center">

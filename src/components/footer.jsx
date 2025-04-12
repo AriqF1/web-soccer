@@ -14,23 +14,12 @@ const Footer = () => {
           </a>
           <DarkModeToggle />
           <p className="my-6 text-gray-500 dark:text-gray-400">
-            Your go-to source for the latest Premier League scores, standings,
-            fixtures, player stats, and news. Stay updated with everything
-            happening in the world's most exciting football league.
+            Stay Update with the latest news and fixtures from the Premier League.
           </p>
-          <ul className="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
-            {NavMenu.map((item, index) => (
-              <li key={index}>
-                <a href="#" className="mr-4 hover:underline md:mr-6">
-                  {item.text}
-                </a>
-              </li>
-            ))}
-          </ul>
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
             © 2025{" "}
             <a href="#" className="hover:underline">
-              Premier League Hub
+              Premier Hub
             </a>
             . All Rights Reserved.
           </span>
